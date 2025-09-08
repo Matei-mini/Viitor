@@ -1,11 +1,11 @@
-
+import Navbar from "./components/Navbar.js";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 export default function Home() {
 
   return (
       <div>
-          <Header />
+          <Navbar />
           <main className="p-4">
               <h1>Prima parte</h1>
               <p className="text-lg mt-4">
