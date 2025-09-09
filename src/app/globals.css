@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.mainTitle {
+    @apply text-4xl text-center font-semibold leading-tight text-blue-600;
+}
+.paragraph1 {
+    @apply text-lg leading-relaxed text-white font-light font-mono;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
