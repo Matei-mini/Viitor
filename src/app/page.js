@@ -1,13 +1,12 @@
 import Navbar from "./components/Navbar.js";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 export default function Home() {
 
   return (
-      <div>
+      <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main className="p-4">
-              <h1>Prima parte</h1>
+          <main className="flex-grow p-4">
+              <h1 className ="text-center">Prima parte</h1>
               <p className="text-lg mt-4">
                   Cel mai bun site pentru a fi la curent cu ultimele știri și informații din lumea Binance și a criptomonedelor!
               </p>
