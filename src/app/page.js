@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar.js";
+import {Navbar} from "./components/Navbar.js";
 import Footer from "./components/Footer";
 export default function Home() {
 
