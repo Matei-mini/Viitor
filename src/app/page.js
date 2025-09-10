@@ -4,7 +4,6 @@ export default function Home() {
 
   return (
       <div className="flex flex-col min-h-screen">
-          <Navbar />
           <main className="flex-grow p-4">
               <h1 className ="mainTitle">Prima parte</h1>
               <p className="paragraph1">
