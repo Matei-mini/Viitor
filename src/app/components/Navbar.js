@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
-
+import CompStyle from "./SearchBar";
 export function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname(); // ruta curentă
@@ -39,20 +39,12 @@ export function Navbar() {
                     })}
                 </ul>
 
-                <input
-                    type="text"
-                    placeholder="Search crypto news..."
-                    className="px-2 py-1 rounded text-black placeholder-gray-950 focus:outline-neutral-600"
-                />
+                <CompStyle />
             </div>
 
             {/* Mobile menu */}
             <div className="flex md:hidden items-center gap-2 flex-1">
-                <input
-                    type="text"
-                    placeholder="Search crypto news..."
-                    className="px-2 py-1 rounded text-black placeholder-gray-950 focus:outline-cyan-200 flex-1 w-1/6"
-                />
+                <CompStyle />
                 <button
                     className="text-2xl"
                     onClick={() => setMenuOpen(!menuOpen)}
