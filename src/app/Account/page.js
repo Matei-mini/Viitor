@@ -39,13 +39,17 @@ export default function AccountPage() {
     }, []);
 
     return (
-        <form id="form" className="p-6 max-w-sm mx-auto">
-            <label htmlFor="name">Name</label>
-            <input id="name" className="block w-full mb-3 border p-2" />
-            <label htmlFor="password">Password</label>
-            <input id="password" type="password" className="block w-full mb-4 border p-2" />
-            <div id="error" className="text-red-600 mb-3"></div>
-            <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">Submit</button>
-        </form>
+        <div className="min-h-screen flex items-center bg-gray-900 justify-center ">
+            <form id="form" className="p-6 max-w-sm w-full bg-black shadow-md rounded">
+                <label htmlFor="name" className="block mb-1 font-medium">Name</label>
+                <input id="name" className="block w-full mb-3 border p-2 rounded" />
+                <label htmlFor="password" className="block mb-1 font-medium">Password</label>
+                <input id="password" type="password" className="block w-full mb-4 border p-2 rounded" />
+                <div id="error" className="text-red-600 mb-3"></div>
+                <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition">
+                    Submit
+                </button>
+            </form>
+        </div>
     );
 }
