@@ -1,7 +1,8 @@
+import RssFeedQuick from "../components/RssFeedQuick";
 export default function NewsPage(){
     return (
-        <div>
-            <h1 className="text-center">NewsPage</h1>
+        <div className="bg-gray-800">
+            <RssFeedQuick />
         </div>
     )
 }
