@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
+
 export default function AccountPage() {
     useEffect(() => {
         const form = document.getElementById("form");
@@ -39,15 +40,46 @@ export default function AccountPage() {
     }, []);
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-        <form id="form" className="p-1 max-w-120 w-full  rounded-lg shadow-lg">
-            <label htmlFor="name">Name</label>
-            <input id="name" className="block w-full mb-3 border p-2" />
-            <label htmlFor="password">Password</label>
-            <input id="password" type="password" className="block w-full mb-4 border p-2" />
-            <div id="error" className="text-red-600 mb-3"></div>
-            <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">Submit</button>
-        </form>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+            <form
+                id="form"
+                className="p-6 w-full max-w-md rounded-2xl shadow-2xl bg-gray-800 space-y-4"
+            >
+                <h2 className="text-2xl font-bold text-center text-white">Login</h2>
+
+                <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-gray-300">
+                        Name
+                    </label>
+                    <input
+                        id="name"
+                        placeholder="YourAccountName"
+                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-white placeholder-gray-400 p-3 focus:ring-2 focus:ring-lime-500 focus:outline-none"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="password" className="block text-sm font-semibold text-gray-300">
+                        Password
+                    </label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="YourAccountPassword"
+                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-white placeholder-gray-400 p-3 focus:ring-2 focus:ring-lime-500 focus:outline-none"
+                    />
+                </div>
+
+                <div id="error" className="text-red-500 text-sm"></div>
+
+                <button
+                    type="submit"
+                    className="w-full bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 rounded-lg transition duration-200"
+                >
+                    Submit
+                </button>
+            </form>
         </div>
+
     );
 }
