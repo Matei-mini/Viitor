@@ -78,6 +78,9 @@ export default function AccountPage() {
                 >
                     Submit
                 </button>
+                <div className="flex justify-center">
+                <a href="/" className="font-bold inline-block text-lime-800 hover:text-lime-500">Sing up</a>
+                </div>
             </form>
         </div>
 
