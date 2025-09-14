@@ -17,9 +17,12 @@ export default function AccountPage() {
             const msgs = [];
             if (!name.value.trim()) msgs.push("Name is required");
             if (!password.value.trim()) msgs.push("Password is required");
+            else
+                if (password.value.trim().length < 8) msgs.push("Password length should be greater than 8.");
             if (msgs.length) {
                 e.preventDefault();
                 errorEl.textContent = msgs.join(", ");
+                return (0);
             } else {
                 e.preventDefault();
                 errorEl.textContent = "";
