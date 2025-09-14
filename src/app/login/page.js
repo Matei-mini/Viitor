@@ -5,7 +5,7 @@ import ButtonHm from "../components/buttonHm";
 
 
 export default function LogIn(){
-   /* useEffect(() => {
+    useEffect(() => {
         const form = document.getElementById("form");
         const name = document.getElementById("name");
         const password = document.getElementById("password");
@@ -39,7 +39,7 @@ export default function LogIn(){
 
         form.addEventListener("submit", onSubmit);
         return () => form.removeEventListener("submit", onSubmit);
-    }, []);*/
+    }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
