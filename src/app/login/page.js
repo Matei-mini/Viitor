@@ -1,9 +1,8 @@
-"use client";
+"use client"
 import { useEffect } from "react";
 import Link from "next/link";
 
-
-export default function AccountPage() {
+export default function LogIn(){
     useEffect(() => {
         const form = document.getElementById("form");
         const name = document.getElementById("name");
@@ -46,7 +45,7 @@ export default function AccountPage() {
                 id="form"
                 className="p-6 w-full max-w-md rounded-2xl shadow-2xl bg-gray-800 space-y-4"
             >
-                <h2 className="text-2xl font-bold text-center text-white">Sing Up</h2>
+                <h2 className="text-2xl font-bold text-center text-white">Log In</h2>
 
                 <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-300">
@@ -80,10 +79,9 @@ export default function AccountPage() {
                     Submit
                 </button>
                 <div className="flex justify-center">
-                <Link href="/login" className="font-bold inline-block text-lime-800 hover:text-lime-500">Log In</Link>
+                    <Link href="/Account" className="font-bold inline-block text-lime-800 hover:text-lime-500">Sing Up</Link>
                 </div>
             </form>
         </div>
-
-    );
+    )
 }
