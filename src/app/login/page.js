@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 export default function LogIn(){
-    useEffect(() => {
+   /* useEffect(() => {
         const form = document.getElementById("form");
         const name = document.getElementById("name");
         const password = document.getElementById("password");
@@ -37,10 +37,10 @@ export default function LogIn(){
 
         form.addEventListener("submit", onSubmit);
         return () => form.removeEventListener("submit", onSubmit);
-    }, []);
+    }, []);*/
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
             <form
                 id="form"
                 className="p-6 w-full max-w-md rounded-2xl shadow-2xl bg-gray-800 space-y-4"
@@ -79,27 +79,9 @@ export default function LogIn(){
                     Submit
                 </button>
                 <div className="flex justify-center">
-                    <Link href="/Account" className="font-bold inline-block text-lime-800 hover:text-lime-500">Sign Up</Link>
+                    <Link href="/Account" className="font-bold inline-block text-lime-800 hover:text-lime-500">Sing Up</Link>
                 </div>
             </form>
-
-            {/* Buton Home */}
-            <div className="mt-6">
-                <Link
-                    href="/Home"
-                    className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-medium px-6 py-3 rounded-lg transition duration-200 border border-gray-600 hover:border-gray-500"
-                >
-                    <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    Home
-                </Link>
-            </div>
         </div>
     )
 }
