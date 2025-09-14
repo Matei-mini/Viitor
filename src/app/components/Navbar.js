@@ -9,7 +9,7 @@ export function Navbar() {
     const pathname = usePathname(); // ruta curentă
 
     const menuItems = [
-        { href: "/", label: "Home" },
+        { href: "/", label: "ButtonHm" },
         { href: "/News", label: "News" },
         { href: "/Account", label: "Account" },
     ];
