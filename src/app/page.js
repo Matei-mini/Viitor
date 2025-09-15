@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 export default function Home() {
 
   return (
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
           <main className="flex-grow p-4">
               <h1 className ="mainTitle">Prima parte</h1>
               <p className="paragraph1">
