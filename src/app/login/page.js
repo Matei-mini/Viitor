@@ -1,6 +1,7 @@
 "use client"
 import { useEffect } from "react";
 import Link from "next/link";
+import ButtonHm from "../components/buttonHm";
 
 export default function LogIn(){
     useEffect(() => {
@@ -86,6 +87,7 @@ export default function LogIn(){
                     <Link href="/Account" className="font-bold inline-block text-lime-800 hover:text-lime-500">Sing Up</Link>
                 </div>
             </form>
+            <ButtonHm></ButtonHm>
         </div>
     )
 }
