@@ -5,7 +5,7 @@ import ButtonHm from "../components/buttonHm";
 
 
 export default function LogIn(){
-   /* useEffect(() => {
+    useEffect(() => {
         const form = document.getElementById("form");
         const name = document.getElementById("name");
         const password = document.getElementById("password");
@@ -13,33 +13,37 @@ export default function LogIn(){
         if (!form) return;
 
         const onSubmit = async (e) => {
-            const msgs = [];
-            if (!name.value.trim()) msgs.push("Name is required");
-            if (!password.value.trim()) msgs.push("Password is required");
-            if (msgs.length) {
-                e.preventDefault();
-                errorEl.textContent = msgs.join(", ");
-            } else {
-                e.preventDefault();
-                errorEl.textContent = "";
-                try {
-                    const res = await fetch("/Account/api/save", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ name: name.value, password: password.value }),
-                    });
-                    if (!res.ok) throw new Error("Request failed");
-                    alert("Saved successfully! ✅");
+            e.preventDefault();
+            errorEl.textContent = "";
+
+            if (!name.value.trim() || !password.value.trim()) {
+                errorEl.textContent = "Name and password are required";
+                return;
+            }
+
+            try {
+                const res = await fetch("/login/api", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: name.value, password: password.value }),
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    alert("✅ Login successful");
                     form.reset();
-                } catch (err) {
-                    errorEl.textContent = "Failed to save. Check server logs.";
+                } else {
+                    errorEl.textContent = "❌ Wrong name or password";
                 }
+            } catch (err) {
+                errorEl.textContent = "Server error: " + err.message;
             }
         };
 
         form.addEventListener("submit", onSubmit);
         return () => form.removeEventListener("submit", onSubmit);
-    }, []);*/
+    }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
