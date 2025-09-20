@@ -12,7 +12,35 @@ export default function RssFeedQuick() {
                 setLoading(true);
                 setError(null);
 
-                // Folosim RSS2JSON API cu link-ul tău
+
+                const feeds = [
+                    "https://www.coindesk.com/arc/outboundfeeds/rss/",
+                    "https://cointelegraph.com/rss"
+                ];
+
+                const results = await Promise.all(
+                    feeds.map(rssUrl =>
+                            fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`)
+                                .then(res => res.json())
+                        )
+                    );
+
+                const allItems = results.flatMap(r => r.items || []);
+
+
+                allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+                setItems( allItems );
+            }catch (err) {
+                setError(err.message);
+            }finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRSSFeed();
+    }, []);
+             /*
                 const rssUrl = "https://www.coindesk.com/arc/outboundfeeds/rss/?_gl=1*10n4j7v*_up*MQ..*_ga*NDA2NTY3OTI5LjE3NTgzNTQyMzM.*_ga_VM3STRYVN8*czE3NTgzNTQyMzIkbzEkZzAkdDE3NTgzNTQyMzIkajYwJGwwJGg2MzQ1MTQwNzE.";
                 const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
@@ -44,7 +72,7 @@ export default function RssFeedQuick() {
 
         fetchRSSFeed();
     }, []);
-
+*/
     // Funcție pentru formatarea datei
     const formatDate = (dateString) => {
         try {
