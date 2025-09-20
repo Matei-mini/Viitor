@@ -103,7 +103,7 @@ export default function Home() {
     const imageUrl = getImageUrl(item);
 
     return (
-
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         <div className="p-8 max-w-4xl mx-auto">
             <h1 className="text-4xl font-bold text-white mb-6">Crypto Highlight</h1>
             <div className="bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700 group hover:border-yellow-400/50">
@@ -157,6 +157,8 @@ export default function Home() {
                     </div>
                 ))}
             </div>
+
+        </div>
         </div>
     );
 }
