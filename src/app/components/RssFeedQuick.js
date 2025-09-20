@@ -13,7 +13,7 @@ export default function RssFeedQuick() {
                 setError(null);
 
                 // Folosim RSS2JSON API cu link-ul tău
-                const rssUrl = "https://rss.app/feeds/ttVWpxevQpa7ioLZ.xml";
+                const rssUrl = "https://www.coindesk.com/arc/outboundfeeds/rss/?_gl=1*10n4j7v*_up*MQ..*_ga*NDA2NTY3OTI5LjE3NTgzNTQyMzM.*_ga_VM3STRYVN8*czE3NTgzNTQyMzIkbzEkZzAkdDE3NTgzNTQyMzIkajYwJGwwJGg2MzQ1MTQwNzE.";
                 const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
                 const response = await fetch(apiUrl);
