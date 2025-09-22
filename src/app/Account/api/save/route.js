@@ -1,40 +1,36 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { db } from "@/db_lib/db";
+import bcrypt from "bcryptjs";
 
 export async function POST(req) {
     try {
-        const { name, password } = await req.json();
+        const { username, password } = await req.json();
 
-        const filePath = path.join(process.cwd(), "src", "app", "Account", "data.txt");
+        const u = (username || "").trim();
+        const p = (password || "").trim();
 
-        let existingData = "";
-        try {
-            existingData = await fs.readFile(filePath, "utf8");
-        } catch {
-
-            await fs.writeFile(filePath, "", "utf8");
+        if (!u || !p) {
+            return Response.json({ ok: false, error: "username and password are required" }, { status: 400 });
+        }
+        if (p.length < 8) {
+            return Response.json({ ok: false, error: "password must be at least 8 characters" }, { status: 400 });
         }
 
-        const lines = existingData.split("\n").filter(Boolean);
-        const nameExists = lines.some(line => line.startsWith(`Name: ${name},`));
+        const hash = await bcrypt.hash(p, 12);
 
-        if (nameExists) {
-            return new Response(
-                JSON.stringify({ success: false, message: "Name already taken ❌" }),
-                { status: 400 }
-            );
-        }
-
-        const line = `Name: ${name}, Password: ${password}\n`;
-        await fs.appendFile(filePath, line, "utf8");
-
-        return new Response(
-            JSON.stringify({ success: true, message: "Saved to file ✅" }),
-            { status: 200 }
+        const [result] = await db.execute(
+            "INSERT INTO users (username, password_hash) VALUES (?, ?)",
+            [u, hash]
         );
-    } catch (error) {
-        return new Response(JSON.stringify({ success: false, error: error.message }), {
-            status: 500,
-        });
+
+        return Response.json({ ok: true, userId: result.insertId }, { status: 201 });
+    } catch (err) {
+        console.error("SIGNUP_ERROR:", err);
+        if (err?.code === "ER_DUP_ENTRY") {
+            return Response.json({ ok: false, error: "username already exists" }, { status: 409 });
+        }
+        return Response.json(
+            { ok: false, error: process.env.NODE_ENV === "development" ? err.message : "server error" },
+            { status: 500 }
+        );
     }
 }
