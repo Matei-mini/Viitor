@@ -1,71 +1,83 @@
 "use client";
-import { useEffect } from "react";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ButtonHm from "../components/buttonHm";
 
+export default function SignUpPage() {
+    const router = useRouter();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [err, setErr] = useState("");
+    const [loading, setLoading] = useState(false);
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setErr("");
 
-export default function AccountPage() {
-    useEffect(() => {
-        const form = document.getElementById("form");
-        const name = document.getElementById("name");
-        const password = document.getElementById("password");
-        const errorEl = document.getElementById("error");
-        if (!form) return;
+        const msgs = [];
+        if (!username.trim()) msgs.push("Username is required");
+        if (!password.trim()) msgs.push("Password is required");
+        else if (password.trim().length < 8) msgs.push("Password must be at least 8 characters");
 
-        const onSubmit = async (e) => {
-            const msgs = [];
-            if (!name.value.trim()) msgs.push("Name is required");
-            if (!password.value.trim()) msgs.push("Password is required");
-            else
-                if (password.value.trim().length < 8) msgs.push("Password length should be greater than 8");
-            if (msgs.length) {
-                e.preventDefault();
-                errorEl.textContent = msgs.join(", ");
-                return (0);
-            } else {
-                e.preventDefault();
-                errorEl.textContent = "";
-                try {
-                    const res = await fetch("/Account/api/save", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ name: name.value, password: password.value }),
-                    });
-                    const result = await res.json();
-                    if (result.success) {
-                        errorEl.textContent = "";
-                        alert("Saved successfully! ✅");
-                        form.reset();
-                    } else {
-                        errorEl.textContent = result.message || "Failed to save ❌";
-                    }
-                } catch (err) {
-                    errorEl.textContent = "Failed to save. Check server logs.";
-                }
+        if (msgs.length) {
+            setErr(msgs.join(", "));
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            const res = await fetch("/Account/api/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username.trim(), password }),
+            });
+
+            // încearcă să citești JSON; dacă nu e JSON, declanșează o eroare generică
+            let data = null;
+            try {
+                data = await res.json();
+            } catch {
+                data = null;
             }
-        };
 
-        form.addEventListener("submit", onSubmit);
-        return () => form.removeEventListener("submit", onSubmit);
-    }, []);
+            if (!res.ok || !data?.ok) {
+                setErr(data?.error || "Failed to sign up");
+                return;
+            }
+
+            // succes
+            setUsername("");
+            setPassword("");
+            router.push("/login");
+        } catch {
+            setErr("Server error. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
             <form
-                id="form"
+                onSubmit={onSubmit}
                 className="p-6 w-full max-w-md rounded-2xl shadow-2xl bg-gray-800 space-y-4"
             >
-                <h2 className="text-2xl font-bold text-center text-white">Sing Up</h2>
+                <h2 className="text-2xl font-bold text-center text-white">Sign Up</h2>
 
                 <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-300">
-                        Name
+                    <label htmlFor="username" className="block text-sm font-semibold text-gray-300">
+                        Username
                     </label>
                     <input
-                        id="name"
+                        id="username"
                         placeholder="YourAccountName"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-white placeholder-gray-400 p-3 focus:ring-2 focus:ring-lime-500 focus:outline-none"
+                        autoComplete="username"
                     />
                 </div>
 
@@ -77,24 +89,33 @@ export default function AccountPage() {
                         id="password"
                         type="password"
                         placeholder="YourAccountPassword"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-white placeholder-gray-400 p-3 focus:ring-2 focus:ring-lime-500 focus:outline-none"
+                        autoComplete="new-password"
                     />
+                    <p className="text-xs text-gray-400 mt-1">Minim 8 caractere.</p>
                 </div>
 
-                <div id="error" className="text-red-500 text-sm"></div>
+                {err ? <div className="text-red-500 text-sm">{err}</div> : null}
 
                 <button
                     type="submit"
-                    className="w-full bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 rounded-lg transition duration-200"
+                    disabled={loading}
+                    className="w-full bg-lime-600 hover:bg-lime-700 disabled:opacity-60 text-white font-bold py-3 rounded-lg transition duration-200"
                 >
-                    Submit
+                    {loading ? "Creating account..." : "Create account"}
                 </button>
-                <div className="flex justify-center">
-                <Link href="/login" className="font-bold inline-block text-lime-800 hover:text-lime-500">Log In</Link>
+
+                <div className="flex justify-center gap-1 text-sm">
+                    <span className="text-gray-300">Ai deja cont?</span>
+                    <Link href="/login" className="font-bold text-lime-400 hover:text-lime-300">
+                        Log In
+                    </Link>
                 </div>
             </form>
-            <ButtonHm></ButtonHm>
-        </div>
 
+            <ButtonHm />
+        </div>
     );
 }
