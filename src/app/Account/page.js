@@ -35,7 +35,7 @@ export default function SignUpPage() {
                 body: JSON.stringify({ username: username.trim(), password }),
             });
 
-            // încearcă să citești JSON; dacă nu e JSON, declanșează o eroare generică
+
             let data = null;
             try {
                 data = await res.json();
@@ -48,7 +48,6 @@ export default function SignUpPage() {
                 return;
             }
 
-            // succes
             setUsername("");
             setPassword("");
             router.push("/login");

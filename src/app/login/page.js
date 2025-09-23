@@ -26,24 +26,23 @@ export default function LoginPage() {
 
         try {
             setLoading(true);
-            const res = await fetch("/login/api", {           // 👈 IMPORTANT: matches your folder
+            const res = await fetch("/login/api", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: username.trim(), password }),
             });
 
             let data = null;
-            try { data = await res.json(); } catch { /* ignore */ }
+            try { data = await res.json(); } catch {}
 
             if (!res.ok || !data?.ok) {
                 setErr(data?.error || "Failed to log in");
                 return;
             }
 
-            // success
             setUsername("");
             setPassword("");
-            router.push("/"); // or wherever you want to go after login
+            router.push("/");
         } catch {
             setErr("Server error. Please try again.");
         } finally {
