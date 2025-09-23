@@ -4,8 +4,8 @@ const config = {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Mateiemil2018",   // <-- correct this
-    database: "mywebsite",           // <-- must match step 1
+    password: "Mateiemil2018",
+    database: "mywebsite",
     waitForConnections: true,
     connectionLimit: 10,
 };
