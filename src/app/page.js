@@ -158,6 +158,10 @@ export default function Home() {
                 ))}
             </div>
 
+            <div >
+                <a href="../helpfull_info">Helpfull informations</a>
+            </div>
+
         </div>
         </div>
     );
