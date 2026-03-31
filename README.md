@@ -8,6 +8,6 @@ The project demonstrates front-end development with reusable React components, d
 
 - Next.js
 - React
-- JavaScript / TypeScript
+- JavaScript 
 - RSS feeds (CoinDesk, CoinTelegraph)
 - CSS / Tailwind-style utility classes
